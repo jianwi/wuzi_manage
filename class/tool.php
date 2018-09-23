@@ -1,52 +1,42 @@
 <?php
 
 class tools {
-
 //初始化pdo
-	private function pdos() {
-
-		require_once '../config/database.php';
+	function pdos() {
+		$dsn = "mysql:dbname=bdm285551132_db;host=bdm285551132.my3w.com;port=3306";
+		$username = "bdm285551132";
+		$passwd = "54dudashen";
 
 		try {
 			$db = new PDO($dsn, $username, $passwd);
 		} catch (PDOException $e) {
 			die("couldn't connect to the database" . $e);
 		}
-
 		return $db;
 	}
 
-//用户信息写入数据库
-	public function write_user($yb_uid, $yb_name, $yb_headimg, $yb_school) {
-		$db = $this->pdos();
-		$sql = "insert into user (yb_name,yb_uid,yb_headimg,yb_school) values('{$yb_name}','{$yb_uid}','{$yb_headimg}')";
-		$result = $db->exec($sql);
-		unset($db);
-	}
-
 //检验用户类型
-	public function check_user($yb_uid, $table) {
-		$db = $this->pdos;
-		$sql = "select * from {$table} where yb_uid='{$yb_uid}'";
-		$row = $db->query($sql);
-		$row = $row->rownCount();
-		if ($row = 0) {
-			return $type = 0;
-		}
+	public function check_user($yb_uid) {
+		$db = $this->pdos();
 		$sql = "select type from manage where yb_uid='{$yb_uid}'";
 		$result = $db->query($sql);
-		foreach ($result as $value) {
-			$result = $value[0];
+		$result1 = $result->rowCount();
+		if ($result1 == 0) {
+			return $result1;
+		} elseif ($result1 > 0) {
+			foreach ($result as $value) {
+				var_dump($value);
+				echo "<br>sss";
+				$result = $value[0];
+				return $value;
+			}
+			if ($result == 1) {
+				return 1;
+			}
+			if ($result == 2) {
+				return 2;
+			}
+			return false;
 		}
-		if ($result = 1) {
-			return 1;
-		}
-		if ($result = 2) {
-			return 2;
-		}
-
 	}
-
-//初始化
-
 }

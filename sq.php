@@ -20,7 +20,6 @@ try {
 	echo $ex->getMessage();
 }
 
-
 // 获取token，保存cookie
 $token = $info['visit_oauth']['access_token']; //轻应用获取的token
 $api->bind($token);
@@ -35,5 +34,12 @@ $yb_birth = $userAll["info"]["yb_regtime"]; //易班注册时间
 $yb_wx = $userAll["info"]["yb_money"]; //网新
 $yb_sex = $userAll["info"]["yb_sex"]; //一个字符，m
 $yb_uid = $userAll["info"]["yb_userid"]; //id
+
+session_start();
+$_SESSION['yb_name'] = $yb_name;
+$_SESSION['yb_uid'] = $yb_uid;
+$_SESSION['token'] = $token;
+$_SESSION['headimg'] = $yb_headimg;
+$_SESSION['yb_school'] = $yb_school;
 
 ?>
