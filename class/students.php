@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <?php
 /**
  * 学生类
@@ -5,66 +6,71 @@
 class students extends tools {
 	public $yb_uid;
 	public $date;
+	public $name;
+	public $xueyuan;
+//构造函数
 	function __construct($yb_uid) {
 		date_default_timezone_set("Asia/Shanghai");
 		$date = time();
 		$this->date = $date;
 		$this->yb_uid = $yb_uid;
-	}
-
-// 检查用户是否注册
-	public function check_is_sign() {
-		$yb_uid = $this->yb_uid;
 		$db = $this->pdos();
-		$sql = "select * from user where yb_uid='{$yb_uid}'";
-		$row1 = $db->query($sql);
-		$row = $row1->rowCount();
-		if ($row == 0) {
-			return false;
-		} else {
-			return $row;
-		}
-
+		$sql = "select yb_name from user where yb_uid='{$yb_uid}'";
+		$name1 = $db->query($sql);
+		$name = $name1->fetchColumn(0);
+		$this->name = $name;
+		$sql = "select xueyuan from user where yb_uid='{$yb_uid}'";
+		$xueyuan1 = $db->query($sql);
+		$xueyuan = $xueyuan1->fetchColumn(0);
+		$this->xueyuan = $xueyuan1;
 	}
 
-//用户信息写入数据库
-	public function writeu($yb_uid, $yb_name, $yb_headimg, $yb_school) {
-		$db = $this->pdos();
-		$sql = "select * from user where yb_uid='{$yb_uid}'";
-		$row1 = $db->query($sql);
-		$row = $row1->rowCount();
-		if ($row == 0) {
-			$db->exec('set names utf8');
-			$sql = "insert into user (yb_name,yb_uid,yb_headimg,yb_school) values('{$yb_name}','{$yb_uid}','{$yb_headimg}','{yb_school}')";
-			$result = $db->exec($sql);
-			return "success writeu";
-		} else {
-			return "fail,user hava exist in table";
-		}
-	}
 //添加订单
 
 	public function add_order($text) {
 		$db = $this->pdos();
+		$yb_uid = $this->yb_uid;
 		$date = $this->date;
-		$sql = "insert into order (yb_uid,goods,date,state) values('{$yb_uid}','{$text}','{$date}','1')";
+		$db->exec("set names utf8");
+		$sql = "INSERT INTO `order`(`goods`, `yb_uid`, `date`, `state`, `date2`) VALUES ('{$text}','{$yb_uid}','{$date}','待审核','{$date}')";
 		$state = $db->exec($sql);
+
+		// var_dump($yb_uid);
+		// var_dump($text);
+		// var_dump($date);
+		// var_dump($state);
 		return $state;
 	}
 
 // 确认收货
 	public function confirm_order($oid) {
 		$db = $this->pdos();
-		$sql = "update order set state='4' where oid='{$oid}'";
+		$db->exec("set names utf8");
+		$sql = "update `order` set state='已确认' where oid='{$oid}'";
 		$state = $db->exec($sql);
 		return $state;
 	}
+//取消订单
+	public function cancel_order($oid) {
+		$db = $this->pdos();
+		$db->exec("set names utf8");
+		$sql = "select state from `order` where oid='{$oid}'";
+		$result1 = $db->query($sql);
+		$result = $result1->fetchColumn(0);
+		if ($result == "待审核") {
+			$sql = "delete from `order` where oid='{$oid}'";
+			$state = $db->exec($sql);
+			return $state;} else {
+			return false;
+		}
+	}
+
 // 查看物资
 	public function look_goods() {
 		$db = $this->pdos();
+		$db->exec("set names utf8");
 		$sql = "select * from goods";
 		$data = $db->query($sql);
-
 		foreach ($data as $value) {
 			$id = $value['id'];
 			$name = $value['name'];
@@ -76,6 +82,8 @@ class students extends tools {
 			echo $id;
 			echo "</td><td>";
 			echo $name;
+			echo "</td><td>";
+			echo $count;
 			echo "</td><td>";
 			echo $date1;
 			echo "</td><td>";
@@ -90,9 +98,9 @@ class students extends tools {
 	public function look_mine() {
 		$yb_uid = $this->yb_uid;
 		$db = $this->pdos();
-		$sql = "select * from order where yb_uid='{$yb_uid}'";
+		$db->exec("set names utf8");
+		$sql = "select * from `order` where yb_uid='{$yb_uid}'";
 		$data = $db->query($sql);
-
 		foreach ($data as $value) {
 			$oid = $value['oid'];
 			$goods = $value['goods'];
@@ -110,15 +118,16 @@ class students extends tools {
 			echo $date2;
 			echo "</td><td>";
 			echo $state;
-			if ($state == 2) {
+			if ($state == "已审核") {
 				echo "</td><td>";
-				echo "<a href='?confirm={$oid}'>确认收货</a>";
+				echo "<a href='action/user_order.php?confirm={$oid}'>确认收货</a>";
 				echo "</td>";
-			} elseif (state == 1) {
+			} elseif ($state == "待审核") {
 				echo "</td><td>";
-				echo "<a href='?cancel={$oid}'>取消订单</a>";
+				echo "<a href='action/user_order.php?cancel={$oid}'>取消订单</a>";
 				echo "</td>";
 			}
+			echo "</tr>";
 		}
 
 		return;

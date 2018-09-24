@@ -1,12 +1,30 @@
 <?php
+define('ROOT', __DIR__);
+// 加载类
 require_once 'sq.php';
 require_once 'class/tool.php';
-require_once 'class/students.php';
-$yb_uid = $_SESSION['yb_uid'];
-$tools = new students($yb_uid);
-$is_sign = $tools->check_is_sign($yb_uid);
-var_dump($is_sign);
-// echo $tools->writeu($yb_uid, $yb_name, $yb_headimg, $yb_school);
+$tools = new tools($yb_uid);
+$tools->load_class("students");
+$tools->load_class("admin1");
+$tools->load_class("admin2");
+$tools->load_class("admin3");
+
 $state = $tools->check_user($yb_uid);
-// echo "$state";
-var_dump($state);
+
+if ($state == 0) {
+	$is_sign = $tools->check_is_sign($yb_uid);
+	if ($is_sign) {
+		$students = new students($yb_uid);
+		require_once 'html/students.html';
+	} else {
+		require_once 'html/zc.html';
+	}
+} elseif ($state == 1) {
+	$admin1 = new admin1($yb_uid);
+	require_once 'html/admin1.html';
+} elseif ($state == 2) {
+	$admin2 = new admin2($yb_uid);
+
+}
+
+// echo $tools->writeu($yb_uid, $yb_name, $yb_headimg, $yb_school);

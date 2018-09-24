@@ -8,32 +8,31 @@ class admin1 extends tools {
 		$this->yb_uid = $yb_uid;
 	}
 //查看产品
-public function look_goods(){
-	$db=$this->pdos();
-		$sql="select * from goods";
-		$data=$db->query($sql);
+	public function look_goods() {
+		$db = $this->pdos();
+		$sql = "select * from goods";
+		$data = $db->query($sql);
 
 		foreach ($data as $value) {
-			$id=$value['id'];
-			$name=$value['name'];
-			$count=$value['count'];
-			$date1=$value['date1'];
-			$date2=$value['date2'];
-			
-		echo "<tr><td>";
-		echo $id;
-		echo "</td><td>";
-		echo $name;
-		echo "</td><td>"
-		echo $date1;
-		echo "</td><td>";
-		echo $date2;
-		echo "</td><td>";
-		echo "<input type='number' name='{$name}' value='{$count}'>";
-		echo "</td>";
+			$id = $value['id'];
+			$name = $value['name'];
+			$count = $value['count'];
+			$date1 = $value['date1'];
+			$date2 = $value['date2'];
+
+			echo "<tr><td>";
+			echo $id;
+			echo "</td><td>";
+			echo $name;
+			echo "</td><td>";
+			echo $date1;
+			echo "</td><td>";
+			echo $date2;
+			echo "</td><td>";
+			echo "<input type='number' name='{$name}' value='{$count}'>";
+			echo "</td>";
+		}
 	}
-	}
-}
 
 //添加产品
 	public function add_goods($name, $count) {

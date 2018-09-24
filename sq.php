@@ -27,19 +27,18 @@ $api->bind($token);
 $userAll = $api->request("user/me"); //读取api
 
 // 解析数组
-$yb_name = $userAll["info"]["yb_username"]; //用户名
+// $yb_name = $userAll["info"]["yb_username"]; //用户名
 $yb_headimg = $userAll["info"]["yb_userhead"]; //头像，49位，string
 $yb_school = $userAll["info"]["yb_schoolname"]; //学校名
-$yb_birth = $userAll["info"]["yb_regtime"]; //易班注册时间
-$yb_wx = $userAll["info"]["yb_money"]; //网新
-$yb_sex = $userAll["info"]["yb_sex"]; //一个字符，m
+// $yb_birth = $userAll["info"]["yb_regtime"]; //易班注册时间
+// $yb_wx = $userAll["info"]["yb_money"]; //网新
+// $yb_sex = $userAll["info"]["yb_sex"]; //一个字符，m
 $yb_uid = $userAll["info"]["yb_userid"]; //id
 
 session_start();
-$_SESSION['yb_name'] = $yb_name;
 $_SESSION['yb_uid'] = $yb_uid;
 $_SESSION['token'] = $token;
-$_SESSION['headimg'] = $yb_headimg;
+$_SESSION['yb_headimg'] = $yb_headimg;
 $_SESSION['yb_school'] = $yb_school;
 
 ?>

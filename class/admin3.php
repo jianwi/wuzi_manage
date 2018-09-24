@@ -4,7 +4,13 @@
  */
 class admin3 extends tools {
 
+	public $yb_uid;
+	function __construct($yb_uid) {
+		$this->yb_uid = $yb_uid;
+	}
+
 //添加管理员
+
 	public function add_manager($yb_uid, $type) {
 		$db = $this->pdos();
 		$sql = "insert into manage (yb_uid,type) values ('{$yb_uid}','{$type}')";
