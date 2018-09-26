@@ -8,15 +8,21 @@ $yb_uid = $_SESSION['yb_uid'];
 $students = new students($yb_uid);
 
 $data = $_POST;
-$goods = "";
+$goods = array();
 foreach ($data as $key => $value) {
 	if ($value == 0) {
 		continue;
 	}
-	$goods .= "{$key}x{$value}\n";
+	$goods[$key] = $value;
+}
+echo "我的订单\n";
+foreach ($goods as $key => $value) {
+	echo $key;
+	echo ":";
+	echo $value;
+	echo "个\n";
 }
 
-echo "$goods";
 $state = $students->add_order($goods);
 if ($state) {
 	echo "提交成功";

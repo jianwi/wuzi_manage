@@ -7,9 +7,6 @@ require_once ROOT . '/../class/admin1.php';
 session_start();
 $yb_uid = $_SESSION['yb_uid'];
 $admin1 = new admin1($yb_uid);
-$name = $_POST['goods'];
-$count = $_POST['count'];
-$state = $admin1->add_goods($name, $count);
-if ($state) {
-	echo "添加成功<br>商品：{$name}<br>数量:{$count}";
-}
+$goods_id = $_GET['id'];
+$state = $admin1->delete_goods($goods_id);
+var_dump($state);
