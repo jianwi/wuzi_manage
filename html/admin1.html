@@ -2,9 +2,12 @@
 <html>
 <head>
 	<title>一类管理员</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
 	<section>
+		添加物料
 <form action="action/add_goods.php" method="post">
 	<p>名称：<input type="text" name="goods"></p>
 	<p>数量：<input type="number" name="count"></p>
@@ -12,9 +15,48 @@
 </form>
 </section>
 <section>
-
-	<?php 
-
+	处理物料
+ <form action="action/goods_deal_count.php" method="post">
+ <table>
+ 	<tr>
+ 		<td>id</td>
+ 		<td>名字</td>
+ 		<td>添加时间</td>
+ 		<td>更新时间</td>
+ 		<td>产品数量</td>
+ 		<td>下架产品</td>
+ 	</tr>
+ <?php 
+$admin1->look_goods();
+?>
+ </table>
+ <input type="submit">
+</form>
+</section>
+<section>
+	查看订单
+	<table>
+		<tr>
+			<td>订单号</td>
+			<td>姓名</td>
+			<td>学院</td>
+			<td>订单详情</td>
+			<td>产生时间</td>
+			<td>更改时间</td>
+			<td>状态</td>
+		</tr>
+		<?php
+		if(isset($_GET['Q'])){
+		$p=$_GET['Q'];
+		}else{
+		$p=10;
+		}
+		$p2=$p+10;
+		$admin1->look_all_orders($p);?>
+	</table>
+<?php 
+//echo "<a href='?Q={$p2}'>下一页</a>"; --> -->
+?>
 </section>
 </body>
 </html>

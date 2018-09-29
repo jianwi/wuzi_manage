@@ -6,12 +6,14 @@ session_start();
 $yb_uid = $_SESSION['yb_uid'];
 $yb_name = $_POST['name'];
 $xueyuan = $_POST['xueyuan'];
+$phone = $_POST['phone'];
+
 $yb_headimg = $_SESSION['yb_headimg'];
 $yb_school = $_SESSION['yb_school'];
 echo "$yb_name";
 echo "$xueyuan";
 $students = new tools($yb_uid);
-$w = $students->writeu($yb_uid, $yb_name, $xueyuan, $yb_school);
+$w = $students->writeu($yb_uid, $yb_name, $xueyuan, $yb_school, $phone);
 if ($w) {
 	echo "注册成功";
 } else {

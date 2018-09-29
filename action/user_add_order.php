@@ -22,7 +22,10 @@ foreach ($goods as $key => $value) {
 	echo $value;
 	echo "个\n";
 }
-
+if (count($goods) < 1) {
+	echo "什么都没有提交";
+	return;
+}
 $state = $students->add_order($goods);
 if ($state) {
 	echo "提交成功";

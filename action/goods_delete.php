@@ -9,4 +9,6 @@ $yb_uid = $_SESSION['yb_uid'];
 $admin1 = new admin1($yb_uid);
 $goods_id = $_GET['id'];
 $state = $admin1->delete_goods($goods_id);
-var_dump($state);
+if ($state) {
+	echo "删除id为{$goods_id}的产品成功！";
+}

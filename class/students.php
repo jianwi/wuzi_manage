@@ -29,12 +29,42 @@ class students extends tools {
 
 	public function add_order($text) {
 		$db = $this->pdos();
+		$db->exec("set names utf8");
 		$yb_uid = $this->yb_uid;
 		$date = $this->date;
+		$limit_goods = array();
+		$goods = array();
+		foreach ($text as $key => $value) {
+			$sql = "select `count` from goods where name='{$key}'";
+			$result1 = $db->query($sql);
+
+			$result = $result1->fetchColumn(0);
+
+			// var_dump($result);
+			$result = $result - $value;
+			if ($result < 0) {
+				$limit_goods[$key] = $result;
+				continue;
+			}
+			$goods[$key] = $result;
+			continue;
+		}
+		if (count($limit_goods) > 0) {
+			echo "以下物件缺货";
+			print_r($limit_goods);
+			return false;
+		}
+
+		foreach ($goods as $key => $value) {
+			// echo "123";
+			$sql = "UPDATE `goods` SET  `count` =  '{$value}' WHERE `name` = '{$key}'";
+			$db->exec($sql);
+		}
+		$text = json_encode($text);
+		$text = addslashes($text);
 		$db->exec("set names utf8");
 		$sql = "INSERT INTO `order`(`goods`, `yb_uid`, `date`, `state`, `date2`) VALUES ('{$text}','{$yb_uid}','{$date}','待审核','{$date}')";
 		$state = $db->exec($sql);
-
 		// var_dump($yb_uid);
 		// var_dump($text);
 		// var_dump($date);
@@ -75,7 +105,7 @@ class students extends tools {
 			$id = $value['id'];
 			$name = $value['name'];
 			$count = $value['count'];
-			$date1 = $value['date1'];
+			$date = $value['date1'];
 			$date2 = $value['date2'];
 
 			echo "<tr><td>";
@@ -85,11 +115,11 @@ class students extends tools {
 			echo "</td><td>";
 			echo $count;
 			echo "</td><td>";
-			echo $date1;
+			echo date("y/m/d-H:i", $date);
 			echo "</td><td>";
-			echo $date2;
+			echo date("y/m/d-H:i", $date2);
 			echo "</td><td>";
-			echo "<input type='number' name='{$name}' value='0'>";
+			echo "<input type='number' name='{$name}' value='0' min='0'>";
 			echo "</td>";
 		}
 	}
@@ -104,27 +134,33 @@ class students extends tools {
 		foreach ($data as $value) {
 			$oid = $value['oid'];
 			$goods = $value['goods'];
+			$goods = json_decode($goods);
 			$date = $value['date'];
 			$date2 = $value['date2'];
 			$state = $value['state'];
-
+			// var_dump($goods);
 			echo "<tr><td>";
 			echo $oid;
 			echo "</td><td>";
-			echo $goods;
+			foreach ($goods as $key => $value) {
+				echo $key;
+				echo ":";
+				echo $value;
+				echo "个\n";
+			}
 			echo "</td><td>";
-			echo $date;
+			echo date("y-m-d H:i", $date);
 			echo "</td><td>";
-			echo $date2;
+			echo date("y-m-d H:i", $date2);
 			echo "</td><td>";
 			echo $state;
-			if ($state == "已审核") {
+			if ($state == "通过") {
 				echo "</td><td>";
-				echo "<a href='action/user_order.php?confirm={$oid}'>确认收货</a>";
+				echo "<a href='action/user_deal_order.php?confirm={$oid}'>确认收货</a>";
 				echo "</td>";
 			} elseif ($state == "待审核") {
 				echo "</td><td>";
-				echo "<a href='action/user_order.php?cancel={$oid}'>取消订单</a>";
+				echo "<a href='action/user_deal_order.php?cancel={$oid}'>取消订单</a>";
 				echo "</td>";
 			}
 			echo "</tr>";

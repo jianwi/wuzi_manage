@@ -4,7 +4,8 @@ echo <<<abc
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>注册</title>
+	<link rel="stylesheet" type="text/css" href="main.css">	<title>注册</title>
+	
 </head>
 <body>
 	<img id="headimg" src="{$yb_headimg}"/>
@@ -12,6 +13,7 @@ echo <<<abc
 	<form method="post" action="action/zc.php">
 <p>学院：<input type="text" name="xueyuan"></p>
 <p>姓名：<input type="text" name="name"></p>
+<p>手机：<input type="number" name="phone" maxlength="11" minlength="11" required>
 <input type="submit">
 </form>
 </body>

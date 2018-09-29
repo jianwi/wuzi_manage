@@ -46,14 +46,14 @@ class tools {
 
 	}
 //用户信息写入数据库
-	public function writeu($yb_uid, $yb_name, $xueyuan, $yb_school) {
+	public function writeu($yb_uid, $yb_name, $xueyuan, $yb_school, $phone) {
 		$db = $this->pdos();
 		$sql = "select * from user where yb_uid='{$yb_uid}'";
 		$row1 = $db->query($sql);
 		$row = $row1->rowCount();
 		if ($row == 0) {
 			$db->exec('set names utf8');
-			$sql = "insert into user (yb_name,yb_uid,yb_school,xueyuan) values('{$yb_name}','{$yb_uid}','{$yb_school}','{$xueyuan}')";
+			$sql = "insert into user (yb_name,yb_uid,yb_school,xueyuan,phone) values('{$yb_name}','{$yb_uid}','{$yb_school}','{$xueyuan}','{$phone}')";
 			$result = $db->exec($sql);
 			return true;
 		} else {
@@ -67,13 +67,13 @@ class tools {
 		$result = $db->query($sql);
 		$result1 = $result->rowCount();
 		if ($result1 == 0) {
-			return $result1;
+			return 0;
 		} elseif ($result1 > 0) {
 			foreach ($result as $value) {
-				var_dump($value);
-				echo "<br>sss";
+				// var_dump($value);
+				// echo "<br>sss";
 				$result = $value[0];
-				return $value;
+				return $result;
 			}
 			if ($result == 1) {
 				return 1;

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>第二类管理员</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<section>
+		支持查看所有订单，审核待审核的订单。
+	</section>
+	<section>
+		待处理的订单
+	<table>
+		<tr>
+			<td>id</td>
+			<td>申请人</td>
+			<td>学院</td>
+			<td>产品</td>
+			<td>创建时间</td>
+			<td>状态</td>
+			<td>操作</td>
+		</tr>
+		<?php
+		$admin2->look_new_orders();
+		?>
+	</table>
+	</section>
+	<section>
+	查看订单
+	<table>
+		<tr>
+			<td>订单号</td>
+			<td>姓名</td>
+			<td>学院</td>
+			<td>订单详情</td>
+			<td>产生时间</td>
+			<td>更改时间</td>
+			<td>状态</td>
+		</tr>
+		<?php
+		if(isset($_GET['Q'])){
+		$p=$_GET['Q'];
+		}else{
+		$p=10;
+		}
+		$p2=$p+10;
+		$admin2->look_all_orders($p);?>
+	</table>
+	</section>
+</body>
+</html>

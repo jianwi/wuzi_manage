@@ -24,7 +24,10 @@ if ($state == 0) {
 	require_once 'html/admin1.html';
 } elseif ($state == 2) {
 	$admin2 = new admin2($yb_uid);
-
+	require_once 'html/admin2.html';
+} elseif ($state == 3) {
+	$admin3 = new admin3($yb_uid);
+	require_once 'html/admin3.html';
 }
 
 // echo $tools->writeu($yb_uid, $yb_name, $yb_headimg, $yb_school);
