@@ -16,7 +16,7 @@ class admin1 extends students {
 	public function look_goods() {
 		$db = $this->pdos();
 		$db->exec("set names utf8");
-		$sql = "select * from goods";
+		$sql = "select * from goods order by id";
 		$data = $db->query($sql);
 
 		foreach ($data as $value) {
@@ -31,11 +31,11 @@ class admin1 extends students {
 			echo "</td><td>";
 			echo $name;
 			echo "</td><td>";
-			echo date("y-m-d H:i", $date1);
+			echo date("y/m/d H:i", $date1);
 			echo "</td><td>";
-			echo date("y-m-d H:i", $date2);
+			echo date("y/m/d H:i", $date2);
 			echo "</td><td>";
-			echo "<input type='number' name='{$id}' value='{$count}'>";
+			echo "<input type='number' name='{$id}' value='{$count}' min='0'>";
 			echo "</td><td>";
 			echo "<a href='action/goods_delete.php?id={$id}'>删除</a>";
 			echo "</td></tr>";
@@ -71,12 +71,12 @@ class admin1 extends students {
 				echo $key;
 				echo ":";
 				echo $value;
-				echo "个\n";
+				echo "个</br>";
 			}
 			echo "</td><td>";
-			echo date("y/m/d-H:i", $date);
+			echo date("y/m/d H:i", $date);
 			echo "</td><td>";
-			echo date("y/m/d-H:i", $date2);
+			echo date("y/m/d H:i", $date2);
 			echo "</td><td>";
 			echo $state;
 			echo "</td></tr>";

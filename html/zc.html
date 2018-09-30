@@ -6,17 +6,17 @@ echo <<<abc
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="main.css">	<title>注册</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 </head>
 <body>
 <section>
-	<img id="headimg" src="{$yb_headimg}"/>
-
+	<img id="headimg" src="{$yb_headimg}"/><br>
+<p>你好，{$yb_username}。欢迎使用陕西科技大学易班物资管理系统。这是你第一次登录此系统，请完善一下个人信息吧。</p>
+<br>
 	<form method="post" action="action/zc.php">
 <p>学院：<input type="text" name="xueyuan" required></p>
 <p>姓名：<input type="text" name="name" required></p>
 <p>手机：<input type="text" name="phone" maxlength="11" pattern="^(0|86|17951)?1[0-9]{10}" required></p>
-<input type="submit">
+<input type="submit" value="注册">
 </form>
 </section>
 </body>

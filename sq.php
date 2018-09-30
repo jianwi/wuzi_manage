@@ -5,6 +5,7 @@
  */
 if (!isset($_GET['yb_uid'])) {
 	echo '<meta http-equiv="refresh" content="0;URL=http://f.yiban.cn/iapp271598">';
+	// echo (' <meta http-equiv="refresh" content="0;url=http://f.yiban.cn/iapp200981">');
 }
 require "classes/yb-globals.inc.php";
 
@@ -30,7 +31,7 @@ $api->bind($token);
 $userAll = $api->request("user/me"); //读取api
 
 // 解析数组
-// $yb_name = $userAll["info"]["yb_username"]; //用户名
+$yb_username = $userAll["info"]["yb_username"]; //用户名
 $yb_headimg = $userAll["info"]["yb_userhead"]; //头像，49位，string
 $yb_school = $userAll["info"]["yb_schoolname"]; //学校名
 // $yb_birth = $userAll["info"]["yb_regtime"]; //易班注册时间

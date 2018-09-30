@@ -7,26 +7,29 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<h2>welcome,欢迎使用物资管理系统。</h2>
+	<img id="headimg" src="<?php echo $yb_headimg;?>"/><br>
+<h3>欢迎使用陕科大易班物资管理系统</h2>
+<br>
 <section>
 	申请物资
 <!-- 先把所有的信息发过来，，然后只保留不为零的数据 -->
 <form method="post" action="action/user_add_order.php">
 <table>
 	<tr>
-		<th>id</th><th>名称</th><th>数量</th><th>发布时间</th><th>更新时间</th><th>需求数量</th>
+		<th>id</th><th>名称</th><th>发布时间</th><th>需求数量</th>
     </tr>
 	<?php 
 	$students->look_goods();
 	?>
-
+<tr><td colspan="2">活动介绍</td><td colspan="2"><textarea name="describe" rows="3" cols="45" maxlength="100" required >请在这里输入100字以内的活动介绍。</textarea></td></tr>
 </table>
-<input type="submit">
+<input type="submit" value="提交申请">
 </form>
 
 </section>
+<hr>
 <section>
-	查看订单
+	查看订单详情
 	<form>
 	<table>
 		<tr>
@@ -44,5 +47,6 @@
 </table>
 </form>
 </section>
+<!-- Powered by jianwi.cn -->
 </body>
 </html>

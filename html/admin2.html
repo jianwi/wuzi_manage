@@ -8,9 +8,9 @@
 
 </head>
 <body>
-	<section>
-		支持查看所有订单，审核待审核的订单。
-	</section>
+<img id="headimg" src="<?php echo $yb_headimg;?>"/><br>
+<h3>欢迎使用陕科大易班物资管理系统</h3>
+<br>
 	<section>
 		待处理的订单
 	<table>
@@ -19,9 +19,11 @@
 			<td>申请人</td>
 			<td>学院</td>
 			<td>产品</td>
+			<td>活动简介</td>
 			<td>创建时间</td>
+
 			<td>状态</td>
-			<td>操作</td>
+			<td colspan="2">操作</td>
 		</tr>
 		<?php
 		$admin2->look_new_orders();
@@ -32,7 +34,7 @@
 	查看订单
 	<table>
 		<tr>
-			<td>订单号</td>
+			<td>oid</td>
 			<td>姓名</td>
 			<td>学院</td>
 			<td>订单详情</td>

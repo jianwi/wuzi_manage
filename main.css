@@ -1,6 +1,6 @@
-@media (min-width:800px){
+@media (min-width:900px){
     body{
-        width: 700px;
+        width: 900px;
         margin: 2px auto;
     }
 }
@@ -26,7 +26,7 @@ text-align:center;
     letter-spacing: 0.13rem;
     padding: 0.5rem 0rem 0.7rem 0rem;
     box-shadow: 0px 0px 3px blue;
-    margin: 0.1em 0.2em 0.4em 0.2em;
+    margin: 0.4em 0.2em 0.8em 0.2em;
     border-radius: 0.5rem;
     background: white;
 }
@@ -37,7 +37,7 @@ img{
 }
 #headimg{
     border-radius: 50%;
-    width: 30px;
+    width: 50px;
     align-self: center;
 }
 table{
@@ -75,10 +75,11 @@ td input{
 }
 input[type*="submit"]{
     width : auto;
-    background: rgb(227, 247, 255);
+    background: rgb(157, 207, 215,0.3);
     color:rgba(3, 0, 0, 0.856);
     height: auto;
-    border-radius: 5px;
+    border: 1px solid ;
+    border-radius: 6px;
     padding: 2px 5px;
-    font-size: 110%;
+    font-size: 100%;
 }

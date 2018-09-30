@@ -1,6 +1,6 @@
-@media (min-width:900px){
+@media (min-width:800px){
     body{
-        width: 500px;
+        width: 700px;
         margin: 2px auto;
     }
 }
@@ -21,7 +21,7 @@ p{
     text-indent: 2em;
 }
 section{
-    text-align:center;
+text-align:center;
     line-height: 1.6rem;
     letter-spacing: 0.13rem;
     padding: 0.5rem 0rem 0.7rem 0rem;
@@ -35,6 +35,11 @@ img{
     border-radius: 0.3rem;
     margin:0.2rem auto;
 }
+#headimg{
+    border-radius: 50%;
+    width: 30px;
+    align-self: center;
+}
 table{
     width: 99% ;
     margin: 2px auto;
@@ -47,7 +52,7 @@ table tr{
     color: rgb(39, 39, 39);
 }
 /* 专属 */
-table tr:n-th-of(1){
+tr:nth-of-type(1){
     background: rgba(79, 117, 148, 0.623);
     color: #ffffff;
     text-shadow: #ff6d6d 0px 0px 3px;
@@ -76,5 +81,4 @@ input[type*="submit"]{
     border-radius: 5px;
     padding: 2px 5px;
     font-size: 110%;
-    margin: 3px auto;
 }

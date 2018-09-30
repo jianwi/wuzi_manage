@@ -22,6 +22,7 @@ class admin2 extends admin1 {
 			$state = $value['state'];
 			$name = $value['yb_name'];
 			$xueyuan = $value['xueyuan'];
+			$describe = $value['describe'];
 
 			echo "<tr><td>";
 			echo $oid;
@@ -34,16 +35,18 @@ class admin2 extends admin1 {
 				echo $key;
 				echo ":";
 				echo $value;
-				echo "个\n";
+				echo "个</br>";
 			}
 			echo "</td><td>";
-			echo date("y/m/d-H:i", $date);
+			echo "$describe";
+			echo "</td><td>";
+			echo date("y/m/d H:i", $date);
 			echo "</td><td>";
 			echo $state;
 			echo "</td><td>";
-			echo "<a href='action/check.php?check_y={$oid}'>审核</a>";
+			echo "<a href='action/check.php?check_y={$oid}'>审核通过</a>";
 			echo "</td><td>";
-			echo "<a href='action/check.php?check_n={$oid}'>拒绝</a>";
+			echo "<a href='action/check.php?check_n={$oid}'>不通过</a>";
 			echo "</td></tr>";
 
 		}

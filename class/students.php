@@ -27,7 +27,7 @@ class students extends tools {
 
 //添加订单
 
-	public function add_order($text) {
+	public function add_order($text, $describe) {
 		$db = $this->pdos();
 		$db->exec("set names utf8");
 		$yb_uid = $this->yb_uid;
@@ -63,7 +63,7 @@ class students extends tools {
 		$text = json_encode($text);
 		$text = addslashes($text);
 		$db->exec("set names utf8");
-		$sql = "INSERT INTO `order`(`goods`, `yb_uid`, `date`, `state`, `date2`) VALUES ('{$text}','{$yb_uid}','{$date}','待审核','{$date}')";
+		$sql = "INSERT INTO `order`(`goods`, `yb_uid`, `date`, `state`, `date2`,`describe`) VALUES ('{$text}','{$yb_uid}','{$date}','待审核','{$date}','{$describe}')";
 		$state = $db->exec($sql);
 		// var_dump($yb_uid);
 		// var_dump($text);
@@ -99,7 +99,7 @@ class students extends tools {
 	public function look_goods() {
 		$db = $this->pdos();
 		$db->exec("set names utf8");
-		$sql = "select * from goods";
+		$sql = "select * from goods order by id";
 		$data = $db->query($sql);
 		foreach ($data as $value) {
 			$id = $value['id'];
@@ -112,12 +112,12 @@ class students extends tools {
 			echo $id;
 			echo "</td><td>";
 			echo $name;
-			echo "</td><td>";
-			echo $count;
+			// echo "</td><td>";
+			// echo $count;
 			echo "</td><td>";
 			echo date("y/m/d-H:i", $date);
-			echo "</td><td>";
-			echo date("y/m/d-H:i", $date2);
+			// echo "</td><td>";
+			// echo date("y/m/d-H:i", $date2);
 			echo "</td><td>";
 			echo "<input type='number' name='{$name}' value='0' min='0'>";
 			echo "</td>";
@@ -129,7 +129,7 @@ class students extends tools {
 		$yb_uid = $this->yb_uid;
 		$db = $this->pdos();
 		$db->exec("set names utf8");
-		$sql = "select * from `order` where yb_uid='{$yb_uid}'";
+		$sql = "select * from `order` where yb_uid='{$yb_uid}' order by oid desc";
 		$data = $db->query($sql);
 		foreach ($data as $value) {
 			$oid = $value['oid'];
@@ -146,12 +146,12 @@ class students extends tools {
 				echo $key;
 				echo ":";
 				echo $value;
-				echo "个\n";
+				echo "个</br>";
 			}
 			echo "</td><td>";
-			echo date("y-m-d H:i", $date);
+			echo date("y/m/d H:i", $date);
 			echo "</td><td>";
-			echo date("y-m-d H:i", $date2);
+			echo date("y/m/d H:i", $date2);
 			echo "</td><td>";
 			echo $state;
 			if ($state == "通过") {
