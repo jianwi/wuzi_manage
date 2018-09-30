@@ -6,6 +6,8 @@ require_once ROOT . '/../class/students.php';
 require_once ROOT . '/../class/admin1.php';
 require_once ROOT . '/../class/admin2.php';
 require_once ROOT . '/../class/admin3.php';
+require_once ROOT . '/../config/back.html';
+
 session_start();
 $yb_uid = $_SESSION['yb_uid'];
 $tools = new tools($yb_uid);

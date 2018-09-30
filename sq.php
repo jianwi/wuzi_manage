@@ -3,12 +3,15 @@
  * 轻应用授权
  * 在首页把用户数据写进数据库，全局文件的用户信息从数据库中获取
  */
-
+if (!isset($_GET['yb_uid'])) {
+	echo '<meta http-equiv="refresh" content="0;URL=http://f.yiban.cn/iapp271598">';
+}
 require "classes/yb-globals.inc.php";
 
 //配置文件
 require_once 'config/yb_token.php';
 //初始化
+
 $api = YBOpenApi::getInstance()->init($config['AppID'], $config['AppSecret'], $config['CallBack']);
 
 $iapp = $api->getIApp();

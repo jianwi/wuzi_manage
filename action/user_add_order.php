@@ -3,6 +3,8 @@
 define('ROOT', __DIR__);
 require_once ROOT . '/../class/tool.php';
 require_once ROOT . '/../class/students.php';
+require_once ROOT . '/../config/back.html';
+
 session_start();
 $yb_uid = $_SESSION['yb_uid'];
 $students = new students($yb_uid);

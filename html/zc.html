@@ -5,17 +5,20 @@ echo <<<abc
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="main.css">	<title>注册</title>
-	
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 <body>
+<section>
 	<img id="headimg" src="{$yb_headimg}"/>
 
 	<form method="post" action="action/zc.php">
-<p>学院：<input type="text" name="xueyuan"></p>
-<p>姓名：<input type="text" name="name"></p>
-<p>手机：<input type="number" name="phone" maxlength="11" minlength="11" required>
+<p>学院：<input type="text" name="xueyuan" required></p>
+<p>姓名：<input type="text" name="name" required></p>
+<p>手机：<input type="text" name="phone" maxlength="11" pattern="^(0|86|17951)?1[0-9]{10}" required></p>
 <input type="submit">
 </form>
+</section>
 </body>
 </html>
 abc;

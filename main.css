@@ -1,6 +1,6 @@
-@media (min-width:900px){
+@media (min-width:800px){
     body{
-        width: 500px;
+        width: 700px;
         margin: 2px auto;
     }
 }
@@ -34,6 +34,11 @@ img{
     width:300px;
     border-radius: 0.3rem;
     margin:0.2rem auto;
+}
+#headimg{
+    border-radius: 50%;
+    width: 30px;
+    align-self: center;
 }
 table{
     width: 99% ;
