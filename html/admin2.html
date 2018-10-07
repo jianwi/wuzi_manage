@@ -16,14 +16,14 @@
 	<table>
 		<tr>
 			<td>id</td>
-			<td>申请人</td>
+			<!-- <td>申请人</td> -->
 			<td>学院</td>
-			<td>产品</td>
-			<td>活动简介</td>
+			<!-- <td>产品</td> -->
+			<!-- <td>活动简介</td> -->
 			<td>创建时间</td>
 
 			<td>状态</td>
-			<td colspan="2">操作</td>
+			<td>操作</td>
 		</tr>
 		<?php
 		$admin2->look_new_orders();
@@ -35,21 +35,16 @@
 	<table>
 		<tr>
 			<td>oid</td>
-			<td>姓名</td>
+			<td>申请人</td>
 			<td>学院</td>
-			<td>订单详情</td>
-			<td>产生时间</td>
-			<td>更改时间</td>
+			<!-- <td>订单详情</td> -->
+			<td>创建时间</td>
+			<td>更新时间</td>
 			<td>状态</td>
+			<td>操作</td>
 		</tr>
 		<?php
-		if(isset($_GET['Q'])){
-		$p=$_GET['Q'];
-		}else{
-		$p=10;
-		}
-		$p2=$p+10;
-		$admin2->look_all_orders($p);?>
+		$admin2->look_all_orders();?>
 	</table>
 	</section>
 </body>

@@ -1,0 +1,76 @@
+<?php
+
+echo <<<abc
+<!DOCTYPE html>
+<html>
+<head>
+	<title>查看详情</title><meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../main.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<img id="headimg" src='{$yb_headimg}'/><br>
+<h3>欢迎使用陕科大易班物资管理系统</h3>
+<br>
+<section>
+	<form action="admin2_deal_order.php" method="post" accept-charset="utf-8">
+	<table>
+		<tr><td colspan="2">订单详情</td></tr>
+		<tr>
+			<td>订单号</td>
+			<td><input  style="text-align:center;border:none" type='text' name='oid' value='{$oid}' readonly='true'></td>
+		</tr>
+		<tr>
+			<td>订单状态</td>
+			<td>{$state}</td>
+		</tr>
+		<tr>
+			<td>姓名</td>
+			<td>{$name} 
+			<a href="chat.php?uid={$uid}">发送通知</a>
+		</td>
+		</tr>
+		<tr>
+		<td>易班id</td>
+		<td><input  style="text-align:center;border:none" type='text' name='uid' value='{$uid}' readonly='true'></td>
+		<tr>
+		<td>学院</td>
+		<td>{$xueyuan}</td>	
+		</tr>
+		<tr>
+			<td>创建时间</td>
+			<td>{$date}</td>
+		</tr>
+		<tr>
+<td>更新时间</td>
+<td>{$date2}</td>
+        <tr>
+        <tr>
+        	<td>物资详情</td>
+        	<td>{$goods0}</td>
+        </tr>
+        <tr>
+        	<td>活动介绍</td>
+        	<td>{$describe}</td>
+        </tr>
+        <tr>
+        	<td>订单意见</td>
+        	<td><textarea cols="50" rows="5" name="yijian" required>{$yijian}</textarea></td>
+        </tr>
+        <tr>
+        	<td>审核</td>
+        	<td><input type="radio" name="check" value="1" checked>审核通过
+        		<input type="radio" name="check" value="0">审核不通过</td>
+
+        	 </td>
+        </tr>
+	</table>
+	<input type="submit" name="" value="提交">	
+	</form>
+
+</section>
+</body>
+</html>
+abc;
+?>

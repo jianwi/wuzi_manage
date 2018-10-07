@@ -9,7 +9,7 @@
 </head>
 <body>
 <img id="headimg" src="<?php echo $yb_headimg;?>"/><br>
-<h3>欢迎使用陕科大易班物资管理系统</h2>
+<h3>欢迎使用陕科大易班物资管理系统</h3>
 <br>
 	<section>
 		添加物资
@@ -25,11 +25,11 @@
  <table>
  	<tr>
  		<td>id</td>
- 		<td>名字</td>
+ 		<td>名称</td>
  		<td>添加时间</td>
  		<td>更新时间</td>
- 		<td>产品数量</td>
- 		<td>下架产品</td>
+ 		<td>数量</td>
+ 		<td>下架</td>
  	</tr>
  <?php 
 $admin1->look_goods();
@@ -43,22 +43,16 @@ $admin1->look_goods();
 	<table>
 		<tr>
 			<td>oid</td>
-			<td>姓名</td>
 			<td>学院</td>
-			<td>订单详情</td>
-			<td>产生时间</td>
-			<td>更改时间</td>
+			<!-- <td>订单详情</td> -->
+			<td>更新时间</td>
 			<td>状态</td>
+			<td>操作</td>
 		</tr>
 		<?php
-		if(isset($_GET['Q'])){
-		$p=$_GET['Q'];
-		}else{
-		$p=10;
-		}
-		$p2=$p+10;
 		$admin1->look_all_orders();?>
 	</table>
+	</section>
 <?php 
 //echo "<a href='?Q={$p2}'>下一页</a>"; --> -->
 ?>

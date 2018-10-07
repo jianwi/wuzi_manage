@@ -1,6 +1,6 @@
-@media (min-width:900px){
+@media (min-width:800px){
     body{
-        width: 900px;
+        width: 700px;
         margin: 2px auto;
     }
 }
@@ -37,7 +37,7 @@ img{
 }
 #headimg{
     border-radius: 50%;
-    width: 50px;
+    width: 30px;
     align-self: center;
 }
 table{
@@ -73,7 +73,13 @@ input{
 td input{
     width: 95%;
 }
-input[type*="submit"]{
+
+input[type*="radio"]{
+    width: 18px;
+    margin-right: 10px;
+    margin-left: 28px;
+}input[type*="submit"]{
+    margin: 5px;  
     width : auto;
     background: rgb(157, 207, 215,0.3);
     color:rgba(3, 0, 0, 0.856);

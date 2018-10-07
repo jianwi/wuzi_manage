@@ -84,4 +84,21 @@ class tools {
 			return false;
 		}
 	}
+//发送消息
+	function post_text($token, $yb_uid, $content) {
+		$url = "https://openapi.yiban.cn/msg/letter";
+		$data = array('access_token' => "{$token}", 'to_yb_uid' => "{$yb_uid}", 'content' => "{$content}");
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+
+		$result = curl_exec($ch);
+		curl_close($ch);
+		return $result;
+	}
+
 }

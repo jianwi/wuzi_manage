@@ -82,3 +82,8 @@ input[type*="submit"]{
     padding: 2px 5px;
     font-size: 110%;
 }
+input[type*="radio"]{
+    width: 18px;
+    margin-right: 10px;
+    margin-left: 28px;
+}

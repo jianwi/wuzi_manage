@@ -87,12 +87,43 @@ class students extends tools {
 		$sql = "select state from `order` where oid='{$oid}'";
 		$result1 = $db->query($sql);
 		$result = $result1->fetchColumn(0);
-		if ($result == "待审核") {
-			$sql = "delete from `order` where oid='{$oid}'";
-			$state = $db->exec($sql);
-			return $state;} else {
+		if ($result !== "待审核") {
 			return false;
 		}
+		$sql = "select goods from `order` where oid='{$oid}'";
+		$result1 = $db->query($sql);
+		$result = $result1->fetchColumn(0);
+		$result = json_decode($result);
+		foreach ($result as $key => $value) {
+			$sql = "select `count` from `goods` where `name`='{$key}'";
+			$result1 = $db->query($sql);
+			$count = $result1->fetchColumn(0);
+			$count = $value + $count;
+			// var_dump($count);
+			$sql = "update `goods` set `count`='$count' where `name`='{$key}'";
+			$state = $db->exec($sql);
+		}
+		$sql = "delete from `order` where oid='{$oid}'";
+		$state = $db->exec($sql);
+		return $state;
+
+	}
+//修改活动介绍
+	public function change_describe($content, $oid) {
+		$db = $this->pdos();
+		$db->exec("set names utf8");
+		$sql = "select state from `order` where oid='{$oid}'";
+		$result1 = $db->query($sql);
+		$result = $result1->fetchColumn(0);
+		if ($result == "已确认") {
+			echo "更新失败，已确认的订单不支持修改";
+			return false;
+		}
+
+		$sql = "update `order` set `describe`='{$content}' where `oid`='{$oid}'";
+		$result1 = $db->exec($sql);
+		return $result1;
+
 	}
 
 // 查看物资
@@ -117,7 +148,7 @@ class students extends tools {
 			echo "</td><td>";
 			echo date("y/m/d-H:i", $date);
 			// echo "</td><td>";
-			// echo date("y/m/d-H:i", $date2);
+			// echo date("y/m/d H:i", $date2);
 			echo "</td><td>";
 			echo "<input type='number' name='{$name}' value='0' min='0'>";
 			echo "</td>";
@@ -140,17 +171,15 @@ class students extends tools {
 			$state = $value['state'];
 			// var_dump($goods);
 			echo "<tr><td>";
-			echo $oid;
+			echo "<a href='action/detail_u.php?oid={$oid}'>" . $oid . "</a>";
 			echo "</td><td>";
-			foreach ($goods as $key => $value) {
-				echo $key;
-				echo ":";
-				echo $value;
-				echo "个</br>";
-			}
-			echo "</td><td>";
-			echo date("y/m/d H:i", $date);
-			echo "</td><td>";
+			// foreach ($goods as $key => $value) {
+			// 	echo $key;
+			// 	echo ":";
+			// 	echo $value;
+			// 	echo "个</br>";
+			// }
+			// echo "</td><td>";
 			echo date("y/m/d H:i", $date2);
 			echo "</td><td>";
 			echo $state;

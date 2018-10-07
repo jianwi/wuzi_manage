@@ -43,14 +43,11 @@ class admin1 extends students {
 	}
 // 查看所有订单
 	public function look_all_orders() {
-		// $i = $n - 10;
 		$db = $this->pdos();
 		$db->exec("set names utf8");
-		// $sql = "select * from `order` left join user on order.yb_uid=user.yb_uid order by oid desc limit {$i},{$n}";
 		$sql = "select * from `order` left join user on order.yb_uid=user.yb_uid order by oid desc";
 		$result = $db->query($sql);
-		$data = $db->query($sql);
-		foreach ($data as $value) {
+		foreach ($result as $value) {
 			$oid = $value['oid'];
 			$goods = $value['goods'];
 			$goods = json_decode($goods);
@@ -59,27 +56,36 @@ class admin1 extends students {
 			$state = $value['state'];
 			$name = $value['yb_name'];
 			$xueyuan = $value['xueyuan'];
+			$describe = $value['describe'];
 
 			echo "<tr><td>";
 			echo $oid;
 			echo "</td><td>";
-			echo $name;
-			echo "</td><td>";
+			// echo $name;
+			// echo "</td><td>";
 			echo $xueyuan;
 			echo "</td><td>";
-			foreach ($goods as $key => $value) {
-				echo $key;
-				echo ":";
-				echo $value;
-				echo "个</br>";
-			}
-			echo "</td><td>";
-			echo date("y/m/d H:i", $date);
-			echo "</td><td>";
+			// $goods0=""
+			// foreach ($goods as $key => $value) {
+			// 	$goods0+=$key;
+			// 	$goods0+=":";
+			// 	$goods0+=$value;
+			// 	$goods0+="个</br>";
+			// }
+			// echo "</td><td>";
+			// echo "$describe";
+			// echo "</td><td>";
+			// echo date("y/m/d H:i", $date);
+			// echo "</td><td>";
 			echo date("y/m/d H:i", $date2);
 			echo "</td><td>";
 			echo $state;
-			echo "</td></tr>";
+			echo "</td><td>";
+			echo "<a href='action/detail_u.php?oid={$oid}'>详情</a>";
+			// echo "</td><td>";
+			// echo "<a href='action/check.php?check_n={$oid}'>不通过</a>";
+			// echo "</td></tr>";
+
 		}
 	}
 
