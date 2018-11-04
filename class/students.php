@@ -10,6 +10,7 @@ class students extends tools {
 	public $xueyuan;
 //构造函数
 	function __construct($yb_uid) {
+
 		date_default_timezone_set("Asia/Shanghai");
 		$date = time();
 		$this->date = $date;
@@ -50,8 +51,8 @@ class students extends tools {
 			continue;
 		}
 		if (count($limit_goods) > 0) {
-			echo "以下物件缺货";
-			print_r($limit_goods);
+			echo "存在物件缺货";
+			// print_r($limit_goods);
 			return false;
 		}
 
@@ -132,26 +133,48 @@ class students extends tools {
 		$db->exec("set names utf8");
 		$sql = "select * from goods order by id";
 		$data = $db->query($sql);
+
 		foreach ($data as $value) {
 			$id = $value['id'];
 			$name = $value['name'];
 			$count = $value['count'];
 			$date = $value['date1'];
 			$date2 = $value['date2'];
-
-			echo "<tr><td>";
-			echo $id;
-			echo "</td><td>";
-			echo $name;
+			$hide = $value['hide'];
+			if ($hide == 1) {
+				continue;
+			}
+			$date3 = date("y/m/d-H:i", $date);
+			echo <<<html
+			<div class="showGoods">
+        <div class="top">
+            {$name}
+        </div>
+        <div class="desc">
+        	id:{$id}
+        	<br>
+            产品数量：{$count}
+            <br>
+            发布日期：{$date3}
+        </div>
+        <input type="button" id="{$id}" onclick="reduce(this)" value="-">
+        <input type="number" value="0" name='{$name}'  class="{$id}" min="0" max="{$count}">
+        <input type="button" id="{$id}" onclick="add(this)" value="+">
+    </div>
+html;
+			// echo "<tr><td>";
+			// echo $id;
 			// echo "</td><td>";
-			// echo $count;
-			echo "</td><td>";
-			echo date("y/m/d-H:i", $date);
+			// echo
 			// echo "</td><td>";
-			// echo date("y/m/d H:i", $date2);
-			echo "</td><td>";
-			echo "<input type='number' name='{$name}' value='0' min='0'>";
-			echo "</td>";
+			// echo $name;
+			// echo "</td><td>";
+			// echo date("y/m/d-H:i", $date);
+			// // echo "</td><td>";
+			// // echo date("y/m/d H:i", $date2);
+			// echo "</td><td>";
+			// echo "<input type='number' name='{$name}' value='0' min='0'>";
+			// echo "</td></tr>";
 		}
 	}
 
@@ -171,7 +194,7 @@ class students extends tools {
 			$state = $value['state'];
 			// var_dump($goods);
 			echo "<tr><td>";
-			echo "<a href='action/detail_u.php?oid={$oid}'>" . $oid . "</a>";
+			echo "<a href='action/detail_u.php?oid={$oid}'>" . $oid . "(详)</a>";
 			echo "</td><td>";
 			// foreach ($goods as $key => $value) {
 			// 	echo $key;
@@ -197,4 +220,10 @@ class students extends tools {
 
 		return;
 	}
+
+	// 申请
+	function apply() {
+
+	}
+
 }

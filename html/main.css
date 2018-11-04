@@ -1,9 +1,9 @@
-@media (min-width:800px){
+/* @media (min-width:800px){
     body{
         width: 700px;
         margin: 2px auto;
     }
-}
+} */
 *{
     margin:0px;
     padding: 0px;
@@ -63,8 +63,8 @@ table tr td{
     border: 0px;
 }
 input{
-    border:black solid;
-    background: rgb(227, 247, 255);
+    border: none;
+    background: rgba(171, 162, 171, 0.45);
     color:rgba(255, 111, 111, 0.856);
     height: 20px;
     border-radius: 5px;
@@ -86,4 +86,8 @@ input[type*="radio"]{
     width: 18px;
     margin-right: 10px;
     margin-left: 28px;
+}
+a{
+    color: red;
+    text-decoration: none;
 }

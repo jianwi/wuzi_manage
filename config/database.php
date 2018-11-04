@@ -1,5 +1,7 @@
 <?php
-$dsn = "mysql:dbname=bdm285551132_db;host=bdm285551132.my3w.com;port=3306";
-$username = "bdm285551132";
-$passwd = "54dudashen";
+
+const dsn = "mysql:dbname=wuzi;host=jianwi.cn;port=3306";
+const username = "wuzi";
+const passwd = "jianwi.cn";
+
 ?>

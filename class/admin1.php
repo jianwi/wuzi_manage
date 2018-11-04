@@ -7,10 +7,10 @@ class admin1 extends students {
 	public $yb_uid;
 	public $date;
 	function __construct($yb_uid) {
-		$this->yb_uid = $yb_uid;
 		date_default_timezone_set("Asia/Shanghai");
 		$date = time();
 		$this->date = $date;
+		$this->yb_uid = $yb_uid;
 	}
 //查看产品
 	public function look_goods() {
@@ -25,22 +25,31 @@ class admin1 extends students {
 			$count = $value['count'];
 			$date1 = $value['date1'];
 			$date2 = $value['date2'];
+			$hide = $value['hide'];
 
 			echo "<tr><td>";
 			echo $id;
 			echo "</td><td>";
 			echo $name;
 			echo "</td><td>";
-			echo date("y/m/d H:i", $date1);
+			echo date("y/m/d", $date1);
 			echo "</td><td>";
-			echo date("y/m/d H:i", $date2);
+			echo date("y/m/d", $date2);
 			echo "</td><td>";
-			echo "<input type='number' name='{$id}' value='{$count}' min='0'>";
+			echo "<input type='number' style='width:3.6rem; text-align:center;' name='{$id}' value='{$count}' min='0'>";
 			echo "</td><td>";
-			echo "<a href='action/goods_delete.php?id={$id}'>删除</a>";
+
+			if ($hide == 0) {
+				echo "<a href='action/goods_hide.php?hide={$id}'>显</a>";
+			} else {
+				echo "<a href='action/goods_hide.php?show={$id}'>隐</a>";
+			}
+			echo "</td><td>";
+			echo "<a href='action/goods_delete.php?id={$id}' style='background:yellow;color:red'  class='delete'>删</a>";
 			echo "</td></tr>";
 		}
 	}
+
 // 查看所有订单
 	public function look_all_orders() {
 		$db = $this->pdos();
@@ -90,36 +99,71 @@ class admin1 extends students {
 	}
 
 //添加产品
-	public function add_goods($name, $count) {
+	public function add_goods($name, $count, $hide) {
 		$db = $this->pdos();
+		$yb_uid = $this->yb_uid;
 		$db->exec("set names utf8");
 		$date = $this->date;
-		$sql = "insert into goods (name,count,date1,date2) values('{$name}','{$count}','{$date}','{$date}')";
+		$sql = "insert into goods (name,count,date1,date2,hide) values('{$name}','{$count}','{$date}','{$date}','{$hide}')";
 		$state = $db->exec($sql);
+		$text = "添加了{$count}个{$name}";
+		$sql = "insert into `logs` (yb_uid,date,text) values('{$yb_uid}','{$date}','{$text}')";
+		$db->exec($sql);
 		return $state;
 	}
 // 删除产品
 	public function delete_goods($id) {
 		$db = $this->pdos();
+		$yb_uid = $this->yb_uid;
 		$sql = "delete from `goods` where id='{$id}'";
 		$state = $db->exec($sql);
+		$date = $this->date;
+		$text = "删除了id为{$id}的产品";
+		$sql = "insert into `logs` (yb_uid,date,text) values('{$yb_uid}','{$date}','{$text}')";
+		$db->exec($sql);
 		return $state;
 	}
-//改变数量2
+//改变数量
 	public function change_count($data) {
 		$db = $this->pdos();
+		$yb_uid = $this->yb_uid;
 		$date = $this->date;
 		$states = 0;
+		$text = "";
 		foreach ($data as $key => $value) {
-			$sql = "update goods set count='{$value}' where id='{$key}'";
+			$sql = "update goods set count='$value}' where id='{$key}'";
 			$state = $db->exec($sql);
 			if ($state == 1) {
 				$sql = "update goods set date2 ='{$date}' where id='{$key}'";
 				$db->exec($sql);
+
+				$text .= "更改{$key}的数量为{$value}";
 			}
 			$states = $state + $states;
 		}
 
+		$sql = "insert into `logs` (yb_uid,date,text) values('{$yb_uid}','{$date}','{$text}')";
+		$db->exec($sql);
+
 		return $states;
 	}
+//显示/隐藏
+	function show_or_hide($id, $show_or_hide) {
+		$db = $this->pdos();
+		$yb_uid = $this->yb_uid;
+		$date = $this->date;
+
+		$sql = "update   `goods` set hide= '{$show_or_hide}' where id='{$id}'";
+		$state = $db->exec($sql);
+		if ($state == 1) {
+			$text = "修改{$id}的hide（隐藏）状态为{$show_or_hide}";
+		}
+
+		$sql = "insert into `logs` (yb_uid,date,text) values('{$yb_uid}','{$date}','{$text}')";
+		$db->exec($sql);
+
+		return $state;
+
+	}
+
 }

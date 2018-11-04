@@ -4,8 +4,10 @@
  * 在首页把用户数据写进数据库，全局文件的用户信息从数据库中获取
  */
 if (!isset($_GET['yb_uid'])) {
-	echo '<meta http-equiv="refresh" content="0;URL=http://f.yiban.cn/iapp271598">';
+	// echo '<meta http-equiv="refresh" content="0;URL=http://f.yiban.cn/iapp271598">';
 	// echo (' <meta http-equiv="refresh" content="0;url=http://f.yiban.cn/iapp200981">');
+	echo "未登录，3s后跳转授权";
+	require_once "/config/back.html";
 }
 require "classes/yb-globals.inc.php";
 

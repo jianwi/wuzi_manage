@@ -16,6 +16,9 @@
 <form action="action/add_goods.php" method="post">
 	<p>名称：<input type="text" name="goods" required></p>
 	<p>数量：<input type="number" name="count" min="1" required></p>
+	<p>隐藏：<input type="radio" name="hide" value="0" checked="checked">否
+		<input type="radio" name="hide" value="1" >是
+
 <p>&nbsp&nbsp&nbsp&nbsp&nbsp<input type="submit" value="确认添加"></p>
 </form>
 </section>
@@ -29,6 +32,7 @@
  		<td>添加时间</td>
  		<td>更新时间</td>
  		<td>数量</td>
+ 		<td>状态</td>
  		<td>下架</td>
  	</tr>
  <?php 

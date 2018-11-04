@@ -1,10 +1,10 @@
-@media (min-width:800px){
+/*@media (min-width:800px){
     body{
         width: 700px;
         margin: 2px auto;
     }
 }
-*{
+*/*{
     margin:0px;
     padding: 0px;
     border: 0px;
@@ -13,7 +13,11 @@
 }
 body{
     text-align: center;
-    background:#eeffee;
+    background:#ffffff;
+}
+a{
+    color: red;
+    text-decoration: none;
 }
 p{
    text-align:left;
@@ -21,12 +25,12 @@ p{
     text-indent: 2em;
 }
 section{
-text-align:center;
+    text-align:center;
     line-height: 1.6rem;
     letter-spacing: 0.13rem;
     padding: 0.5rem 0rem 0.7rem 0rem;
-    box-shadow: 0px 0px 3px blue;
-    margin: 0.4em 0.2em 0.8em 0.2em;
+/*    box-shadow: 0px 0px 3px black;
+*/    margin: 0.4em 0.2em 0.8em 0.2em;
     border-radius: 0.5rem;
     background: white;
 }
@@ -50,6 +54,12 @@ table{
 table tr{
     background: aliceblue;
     color: rgb(39, 39, 39);
+    margin: 1px;
+
+}
+tr:nth-of-type(2n+1){
+    background: #23a0ff50;
+    color: #000;
 }
 /* 专属 */
 tr:nth-of-type(1){
@@ -59,26 +69,25 @@ tr:nth-of-type(1){
   
 }
 table tr td{
-    padding: 2px 3px;
+    padding: 1.5px 2px;
     border: 0px;
+    margin: 0px;
 }
 input{
-    border:black solid;
-    background: rgb(227, 247, 255);
+    background: rgba(171, 162, 171, 0.45);
+    border:none;
     color:rgba(255, 111, 111, 0.856);
     height: 20px;
     border-radius: 5px;
     padding: 2px 5px;
-}
-td input{
-    width: 95%;
 }
 
 input[type*="radio"]{
     width: 18px;
     margin-right: 10px;
     margin-left: 28px;
-}input[type*="submit"]{
+}
+input[type*="submit"]{
     margin: 5px;  
     width : auto;
     background: rgb(157, 207, 215,0.3);

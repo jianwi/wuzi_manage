@@ -12,3 +12,4 @@ $config = array(
 // 	'AppSecret' => 'c56c5256bdf6b38ef844b2661375ed6c',
 // 	'CallBack' => 'http://f.yiban.cn/iapp200981',
 // );
+?>

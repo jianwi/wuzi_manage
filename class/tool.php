@@ -1,10 +1,15 @@
 <?php
 
 class tools {
-
+	public $dsn;
+	public $username;
+	public $passwd;
 	public $yb_uid;
 	public $date;
+
+// 构造函数
 	function __construct($yb_uid) {
+
 		date_default_timezone_set("Asia/Shanghai");
 		$date = time();
 		$this->date = $date;
@@ -14,12 +19,13 @@ class tools {
 //初始化pdo
 
 	function pdos() {
-		$dsn = "mysql:dbname=bdm285551132_db;host=bdm285551132.my3w.com;port=3306";
-		$username = "bdm285551132";
-		$passwd = "54dudashen";
+
+		// $dsn = $this->dsn;
+		// $username = $this->username;
+		// $passwd = $this->passwd;
 
 		try {
-			$db = new PDO($dsn, $username, $passwd);
+			$db = new PDO(dsn, username, passwd);
 		} catch (PDOException $e) {
 			die("couldn't connect to the database" . $e);
 		}
@@ -31,6 +37,7 @@ class tools {
 
 		require_once ROOT . '/class/' . $file . '.php';
 	}
+
 //检验是否注册
 	public function check_is_sign() {
 		$yb_uid = $this->yb_uid;
@@ -45,6 +52,7 @@ class tools {
 		}
 
 	}
+
 //用户信息写入数据库
 	public function writeu($yb_uid, $yb_name, $xueyuan, $yb_school, $phone) {
 		$db = $this->pdos();

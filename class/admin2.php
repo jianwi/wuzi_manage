@@ -5,6 +5,10 @@
 class admin2 extends admin1 {
 	public $yb_uid;
 	function __construct($yb_uid) {
+
+		date_default_timezone_set("Asia/Shanghai");
+		$date = time();
+		$this->date = $date;
 		$this->yb_uid = $yb_uid;
 	}
 // 处理订单，显示未处理的订单。
@@ -108,6 +112,10 @@ class admin2 extends admin1 {
 		$state = $db->exec($sql);
 		$sql = "update `order` set date2='{$date}' where oid='{$oid}'";
 		$state = $db->exec($sql);
+		$yb_uid = $this->yb_uid;
+		$text = "审核了订单号为{$oid}的订单";
+		$sql = "insert into `logs` (yb_uid,date,text) values('{$yb_uid}','{$date}','{$text}')";
+		$db->exec($sql);
 		return $state;
 	}
 // 拒绝订单
@@ -120,6 +128,10 @@ class admin2 extends admin1 {
 		return $state;
 		$sql = "update `order` set date2='{$date}' where oid='{$oid}'";
 		$state = $db->exec($sql);
+
+		$text = "拒绝了订单号为{$oid}的订单";
+		$sql = "insert into `logs` (yb_uid,date,text) values('{$yb_uid}','{$date}','{$text}')";
+		$db->exec($sql);
 	}
 //删除订单
 	public function cancel_order($oid) {
@@ -131,6 +143,10 @@ class admin2 extends admin1 {
 		if ($result == "待审核") {
 			$sql = "delete from `order` where oid='{$oid}'";
 			$state = $db->exec($sql);
+
+			$text = "删除了订单号为{$oid}的订单";
+			$sql = "insert into `logs` (yb_uid,date,text) values('{$yb_uid}','{$date}','{$text}')";
+			$db->exec($sql);
 			return $state;} else {
 			return false;
 		}

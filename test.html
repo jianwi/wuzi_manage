@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>查看详情</title><meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../main.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<html><head><meta charset="utf-8">
+
+
+
+	<title>物资管理系统</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="main.css">	
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<img id="headimg" src="http://img02.fs.yiban.cn/11412995/avatar/user/200"><br>
+<h3>欢迎使用陕科大易班物资管理系统</h3>
+<br>
+<section>
+	申请物资
+<!-- 先把所有的信息发过来，，然后只保留不为零的数据 -->
+<form method="post" action="action/user_add_order.php">
+<table>
+<tr>
+		<td>id</td><td>名称</td><td>需求数量</td>
+    </tr>
+	<tr><td>10</td><td>易班熊</td><td><input name="易班熊" value="0" min="0" width="3px" type="number"></td></tr
+		><tr><td>11</td><td>易班定制笔记本</td><td><input style="width: 5rem" name="易班定制笔记本" value="0" min="0" type="number"></td></tr><tr><td>16</td><td>清扬洗发水</td><td><input name="清扬洗发水" value="0" min="0" type="number"></td></tr><tr><td>17</td><td>易班定制雨伞</td><td><input name="易班定制雨伞" value="0" min="0" type="number"></td></tr><tr><td colspan="2">活动介绍</td><td colspan="2"><textarea name="describe" rows="3" cols="25" maxlength="100" required=""></textarea></td></tr>
+</table>
+<input value="提交申请" type="submit">
+</form>
+
+</section>
+<hr>
+<section>
+	查看订单详情
+	<form>
+	<table>
+		<tbody><tr>
+			<th>订单号</th>
+			<th>处理时间</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+		
+	<tr><td><a href="action/detail_u.php?oid=69">69</a></td><td>18/10/07 18:03</td><td>待审核</td><td><a href="action/user_deal_order.php?cancel=69">取消订单</a></td></tr><tr><td><a href="action/detail_u.php?oid=59">59</a></td><td>18/09/30 21:14</td><td>已确认</td></tr><tr><td><a href="action/detail_u.php?oid=55">55</a></td><td>18/09/30 19:54</td><td>不准</td></tr><tr><td><a href="action/detail_u.php?oid=39">39</a></td><td>18/09/26 13:41</td><td>不准</td></tr><tr><td><a href="action/detail_u.php?oid=38">38</a></td><td>18/09/26 13:39</td><td>通过</td><td><a href="action/user_deal_order.php?confirm=38">确认收货</a></td></tr><tr><td><a href="action/detail_u.php?oid=36">36</a></td><td>18/09/26 13:36</td><td>通过</td><td><a href="action/user_deal_order.php?confirm=36">确认收货</a></td></tr><tr><td><a href="action/detail_u.php?oid=35">35</a></td><td>18/09/26 13:34</td><td>待审核</td><td><a href="action/user_deal_order.php?cancel=35">取消订单</a></td></tr><tr><td><a href="action/detail_u.php?oid=34">34</a></td><td>18/09/26 13:31</td><td>待审核</td><td><a href="action/user_deal_order.php?cancel=34">取消订单</a></td></tr><tr><td><a href="action/detail_u.php?oid=33">33</a></td><td>18/09/26 13:31</td><td>待审核</td><td><a href="action/user_deal_order.php?cancel=33">取消订单</a></td></tr><tr><td><a href="action/detail_u.php?oid=32">32</a></td><td>18/09/26 13:29</td><td>待审核</td><td><a href="action/user_deal_order.php?cancel=32">取消订单</a></td></tr><tr><td><a href="action/detail_u.php?oid=31">31</a></td><td>18/09/26 13:29</td><td>不准</td></tr><tr><td><a href="action/detail_u.php?oid=29">29</a></td><td>18/09/26 13:28</td><td>已确认</td></tr><tr><td><a href="action/detail_u.php?oid=28">28</a></td><td>18/09/26 13:27</td><td>通过</td><td><a href="action/user_deal_order.php?confirm=28">确认收货</a></td></tr><tr><td><a href="action/detail_u.php?oid=27">27</a></td><td>18/09/26 13:12</td><td>不准</td></tr><tr><td><a href="action/detail_u.php?oid=25">25</a></td><td>18/09/26 13:10</td><td>不准</td></tr><tr><td><a href="action/detail_u.php?oid=24">24</a></td><td>18/09/26 13:09</td><td>已确认</td></tr><tr><td><a href="action/detail_u.php?oid=20">20</a></td><td>18/09/26 12:07</td><td>已确认</td></tr></tbody></table>
+</form>
+</section>
+
+
+</body></html>

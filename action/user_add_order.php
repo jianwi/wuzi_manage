@@ -1,6 +1,8 @@
 <meta charset="utf-8">
 <?php
 define('ROOT', __DIR__);
+require_once ROOT . '/../config/database.php';
+
 require_once ROOT . '/../class/tool.php';
 require_once ROOT . '/../class/students.php';
 require_once ROOT . '/../config/back.html';

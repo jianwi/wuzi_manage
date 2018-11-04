@@ -16,10 +16,13 @@
 		<p>管理类型：
 		<select name="type">
 			<option value="1">
-				工作站学生
+				学生
 			</option>
 			<option value="2">
-				工作站老师
+				老师
+			</option>
+			<option value="3">
+			超管(谨慎添加)
 			</option>
 		</select></p>
 		<input align="center" type="submit" value="添加">
@@ -39,5 +42,16 @@
 <?php
 $admin3->look_manager();?>
 </table>
+</section>
+<section>
+	查看日志
+	<table>
+		<tr>
+			<td>id</td><td>操作者</td><td>时间</td><td>内容</td>
+
+			<?php $admin3->check_log(0);?>
+		</tr>
+	</table>
+</section>
 </body>
 </html>
