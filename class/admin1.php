@@ -166,4 +166,35 @@ class admin1 extends students {
 
 	}
 
+//审核订单
+	public function check_order_y($oid) {
+		$db = $this->pdos();
+		$date = time();
+		$db->exec("set names utf8");
+		$sql = "update `order` set state='待选择物资' where oid='{$oid}'";
+		$state = $db->exec($sql);
+		$sql = "update `order` set date2='{$date}' where oid='{$oid}'";
+		$state = $db->exec($sql);
+		$yb_uid = $this->yb_uid;
+		$text = "初审通过，订单号为{$oid}";
+		$sql = "insert into `logs` (yb_uid,date,text) values('{$yb_uid}','{$date}','{$text}')";
+		$db->exec($sql);
+		return $state;
+	}
+// 拒绝订单
+	public function check_order_n($oid) {
+		$db = $this->pdos();
+		$date = time();
+		$db->exec("set names utf8");
+		$sql = "update `order` set state='初审不过' where oid='{$oid}'";
+		$state = $db->exec($sql);
+		return $state;
+		$sql = "update `order` set date2='{$date}' where oid='{$oid}'";
+		$state = $db->exec($sql);
+
+		$text = "初审不过，订单号为{$oid}";
+		$sql = "insert into `logs` (yb_uid,date,text) values('{$yb_uid}','{$date}','{$text}')";
+		$db->exec($sql);
+	}
+
 }

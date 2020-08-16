@@ -11,6 +11,7 @@ session_start();
 $yb_uid = $_SESSION['yb_uid'];
 $students = new students($yb_uid);
 
+$oid = $_GET['oid'];
 $data = $_POST;
 $goods = array();
 foreach ($data as $key => $value) {
@@ -22,7 +23,6 @@ foreach ($data as $key => $value) {
 	}
 	$goods[$key] = $value;
 }
-$describe = $data['describe'];
 echo "我的订单\n";
 foreach ($goods as $key => $value) {
 	echo $key;
@@ -34,7 +34,7 @@ if (count($goods) < 1) {
 	echo "什么都没有提交";
 	return;
 }
-$state = $students->add_order($goods, $describe);
+$state = $students->add_order($goods, $oid);
 if ($state) {
 	echo "提交成功";
 }

@@ -29,8 +29,9 @@ section{
     line-height: 1.6rem;
     letter-spacing: 0.13rem;
     padding: 0.5rem 0rem 0.7rem 0rem;
-/*    box-shadow: 0px 0px 3px black;
-*/    margin: 0.4em 0.2em 0.8em 0.2em;
+    /*    box-shadow: 0px 0px 3px black;
+*/
+    margin: 0.4em 0.2em 0.8em 0.2em;
     border-radius: 0.5rem;
     background: white;
 }
@@ -98,3 +99,45 @@ input[type*="submit"]{
     padding: 2px 5px;
     font-size: 100%;
 }
+
+
+
+ 
+                .showGoods{
+                    margin: 0.1rem;
+                    margin-top: 0.5rem;
+                    display: inline-block;
+                    width: 9rem;
+                    text-align: center;
+                    border: 1px black solid;
+                    padding: 0rem 0rem 0.2rem 0rem;
+                    border-radius: 0.5rem;
+                    box-shadow: 0rem 0rem 0.2rem;
+                }
+                .showGoods .top{
+                    display: block;
+                    background: rgba(171, 162, 171, 0.45);
+                    border-radius: 0.6rem;
+                    padding: 0.2rem;
+                    font-size: 1.1rem;
+                    font-family: 楷体;
+                    border-bottom-left-radius: 0px;
+                    border-bottom-right-radius: 0px;
+                    font-weight: 700;
+                }
+                .showGoods .desc{
+                    display: block;
+                    padding: 0.3rem 0.5rem;
+                    text-align: left;
+                    font-size: 0.8rem;
+                }
+                input[type=number]{
+                    width: 3.5rem;
+                }
+                input[type=button]{
+                    width:1.3rem;
+                }
+                input[type=file]{
+                    height: 1.8rem;
+                    padding-bottom: 1.6rem;
+                }

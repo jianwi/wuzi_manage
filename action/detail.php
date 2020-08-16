@@ -33,11 +33,13 @@ foreach ($result as $values) {
 	$goods = $values['goods'];
 	$goods = json_decode($goods);
 	$goods0 = "";
-	foreach ($goods as $key => $value) {
-		$goods0 .= $key;
-		$goods0 .= ":";
-		$goods0 .= $value;
-		$goods0 .= "个</br>";
+	if (!empty($goods)) {
+		foreach ($goods as $key => $value) {
+			$goods0 .= $key;
+			$goods0 .= ":";
+			$goods0 .= $value;
+			$goods0 .= "个</br>";
+		}
 	}
 	$state = $values['state'];
 	$date1 = $values['date'];

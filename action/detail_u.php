@@ -29,11 +29,13 @@ foreach ($result as $values) {
 	$goods = $values['goods'];
 	$goods = json_decode($goods);
 	$goods0 = "";
-	foreach ($goods as $key => $value) {
-		$goods0 .= $key;
-		$goods0 .= ":";
-		$goods0 .= $value;
-		$goods0 .= "个</br>";
+	if (!empty($goods)) {
+		foreach ($goods as $key => $value) {
+			$goods0 .= $key;
+			$goods0 .= ":";
+			$goods0 .= $value;
+			$goods0 .= "个</br>";
+		}
 	}
 	$state = $values['state'];
 	$date1 = $values['date'];
@@ -48,11 +50,26 @@ foreach ($result as $values) {
 	$yijian = $values['yijian'];
 
 }
+$admin1_check = "";
+$xiugai = "";
+
 if ($type > 0) {
 	$tz = "<a href='chat.php?uid={$uid}'>发送通知</a>";
+
+	$admin1_check = <<<html
+		<td>审核</td>
+        	<td><a href="admin1_check.php?y={$oid}">初审通过</a>
+        <a href="admin1_check.php?n={$oid}">初审不通过</a>
+        	 </td>
+        </tr>
+	</table>
+	</form>
+html;
+
 } else {
-	$describe = "<textarea name='describe' cols='30' rows='3'>{$describe}</textarea>";
-	$xiugai = "<input type='submit' value='提交修改'>";
+	// $describe = "<textarea name='describe' cols='30' rows='3'>{$describe}</textarea>";
+	// $xiugai = "<input type='submit' value='提交修改'>";
+
 }
 
 require_once '../html/detail_u.html';

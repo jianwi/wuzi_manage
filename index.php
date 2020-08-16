@@ -1,7 +1,7 @@
 <?php
 define('ROOT', __DIR__);
 // 加载类
-require_once "/config/database.php";
+require_once "config/database.php";
 require_once 'sq.php';
 require_once 'class/tool.php';
 $tools = new tools($yb_uid);

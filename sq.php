@@ -6,8 +6,9 @@
 if (!isset($_GET['yb_uid'])) {
 	// echo '<meta http-equiv="refresh" content="0;URL=http://f.yiban.cn/iapp271598">';
 	// echo (' <meta http-equiv="refresh" content="0;url=http://f.yiban.cn/iapp200981">');
-	echo "未登录，3s后跳转授权";
-	require_once "/config/back.html";
+	echo "<meta charset='utf-8'>";
+	require_once "config/back.html";
+	die("未登录，3s后跳转易班授权页面");
 }
 require "classes/yb-globals.inc.php";
 

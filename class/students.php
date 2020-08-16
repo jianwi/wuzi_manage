@@ -26,9 +26,9 @@ class students extends tools {
 		$this->xueyuan = $xueyuan1;
 	}
 
-//添加订单
+//添加物资
 
-	public function add_order($text, $describe) {
+	public function add_order($text, $oid) {
 		$db = $this->pdos();
 		$db->exec("set names utf8");
 		$yb_uid = $this->yb_uid;
@@ -64,7 +64,8 @@ class students extends tools {
 		$text = json_encode($text);
 		$text = addslashes($text);
 		$db->exec("set names utf8");
-		$sql = "INSERT INTO `order`(`goods`, `yb_uid`, `date`, `state`, `date2`,`describe`) VALUES ('{$text}','{$yb_uid}','{$date}','待审核','{$date}','{$describe}')";
+
+		$sql = "UPDATE `order` SET `goods`= '{$text}',`date2`='{$date}',`state`='待审核' WHERE `oid`='{$oid}'";
 		$state = $db->exec($sql);
 		// var_dump($yb_uid);
 		// var_dump($text);
@@ -88,22 +89,25 @@ class students extends tools {
 		$sql = "select state from `order` where oid='{$oid}'";
 		$result1 = $db->query($sql);
 		$result = $result1->fetchColumn(0);
-		if ($result !== "待审核") {
+		if ($result == "待审核") {
 			return false;
 		}
-		$sql = "select goods from `order` where oid='{$oid}'";
-		$result1 = $db->query($sql);
-		$result = $result1->fetchColumn(0);
-		$result = json_decode($result);
-		foreach ($result as $key => $value) {
-			$sql = "select `count` from `goods` where `name`='{$key}'";
-			$result1 = $db->query($sql);
-			$count = $result1->fetchColumn(0);
-			$count = $value + $count;
-			// var_dump($count);
-			$sql = "update `goods` set `count`='$count' where `name`='{$key}'";
-			$state = $db->exec($sql);
-		}
+		// 上一版本，取消订单后，物资数返回
+		// $sql = "select goods from `order` where oid='{$oid}'";
+		// $result1 = $db->query($sql);
+		// $result = $result1->fetchColumn(0);
+
+		// $result = json_decode($result);
+		// foreach ($result as $key => $value) {
+		// 	$sql = "select `count` from `goods` where `name`='{$key}'";
+		// 	$result1 = $db->query($sql);
+		// 	$count = $result1->fetchColumn(0);
+		// 	$count = $value + $count;
+		// 	// var_dump($count);
+		// 	$sql = "update `goods` set `count`='$count' where `name`='{$key}'";
+		// 	$state = $db->exec($sql);
+		// }
+
 		$sql = "delete from `order` where oid='{$oid}'";
 		$state = $db->exec($sql);
 		return $state;
@@ -144,7 +148,7 @@ class students extends tools {
 			if ($hide == 1) {
 				continue;
 			}
-			$date3 = date("y/m/d-H:i", $date);
+			$date3 = date("y/m/d", $date);
 			echo <<<html
 			<div class="showGoods">
         <div class="top">
@@ -210,9 +214,13 @@ html;
 				echo "</td><td>";
 				echo "<a href='action/user_deal_order.php?confirm={$oid}'>确认收货</a>";
 				echo "</td>";
-			} elseif ($state == "待审核") {
+			} elseif ($state == "文件待审核" || $state == "初审不过") {
 				echo "</td><td>";
 				echo "<a href='action/user_deal_order.php?cancel={$oid}'>取消订单</a>";
+				echo "</td>";
+			} elseif ($state == "待选择物资") {
+				echo "</td><td>";
+				echo "<a href='action/students_apply_wz.php?oid={$oid}'>挑物资</a>";
 				echo "</td>";
 			}
 			echo "</tr>";
@@ -221,9 +229,53 @@ html;
 		return;
 	}
 
-	// 申请
-	function apply() {
+// 申请，生成订单
+	function apply($file_tmp, $file_name, $access_token) {
+		$date = $this->date;
+		$describe = "http://wz.jianwi.cn/upload_file/{$file_name}";
+		// $file_tmp2 = "upload_file/{$file_name}";
+		// $this->upload_file($file_tmp2, $file_name, $access_token);
+		$yb_uid = $this->yb_uid;
+		$db = $this->pdos();
+		$db->exec("set names utf8");
+		$sql = "INSERT INTO `order`(`yb_uid`, `date`, `state`, `date2`,`describe`) VALUES ('{$yb_uid}','{$date}','文件待审核','{$date}','{$describe}')";
+		$state = $db->exec($sql);
+		return $state;
 
 	}
+// 上传文件到服务器
+	function upload_file($file_tmp, $file_name) {
+		// var_dump($file_tmp);
 
+		$b = move_uploaded_file($file_tmp, "/www/web/wz_jianwi_cn/public_html/upload_file");
+		var_dump($b);
+		return "http://wz.jianwi.cn/upload_file/{$file_name}";
+	}
+
+// 上传文件到资料库
+	function upload_file_to_yiban($file_tmp, $file_name, $access_token) {
+
+		$file_name = "wz_" . $file_name;
+		$post_fields = [
+			'access_token' => $access_token,
+			'file_name' => "$file_name",
+			'file_tmp' => "@{$file_tmp}",
+			'share_type' => 5,
+		];
+
+		$url = "https://openapi.yiban.cn/data/upload";
+		$ch = curl_init($url);
+		$opt = [
+			CURLOPT_RETURNTRANSFER => 1, //返回一个字符串，而不是直接输出
+			CURLOPT_SSL_VERIFYPEER => false, //不验证证书
+			// CURLOPT_SSL_VERIFYSTATUS => false, //不验证证书状态
+			CURLOPT_POST => true, //使用post
+			CURLOPT_POSTFIELDS => $post_fields,
+		];
+
+		curl_setopt_array($ch, $opt);
+		$r = curl_exec($ch);
+		curl_close($ch);
+		return json_decode($r)->info->view_url;
+	}
 }

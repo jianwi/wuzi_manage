@@ -1,7 +1,7 @@
 <?php
 
-const dsn = "mysql:dbname=wuzi;host=jianwi.cn;port=3306";
-const username = "wuzi";
-const passwd = "jianwi.cn";
+const dsn = "mysql:dbname=xxx";
+const username = "";
+const passwd = "";
 
 ?>

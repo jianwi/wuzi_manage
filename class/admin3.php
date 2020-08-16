@@ -91,7 +91,7 @@ class admin3 extends tools {
 FROM  `logs`
 LEFT JOIN user ON logs.yb_uid = user.yb_uid
 ORDER BY id DESC
-LIMIT {$n}, 10";
+LIMIT {$n}, 20";
 		$result = $db->query($sql);
 		foreach ($result as $value) {
 			echo "<tr><td>";

@@ -4,88 +4,31 @@
 	<title>物资管理系统</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="main.css">	
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-		<style>
-				.showGoods{
-					margin: 0.3rem;
-					display: inline-block;
-					width: 12rem; 
-					text-align: center;
-					border: 1px black solid;
-					padding: 0.6rem 0.6rem;
-					border-radius: 0.5rem; 
-				}
-				.showGoods .top{
-					display: block;
-					background: rgba(171, 162, 171, 0.45);
-					border-radius: 1rem;
-					padding: 0.6rem;
-					font-size: 1.6rem;
-					font-family: 'Courier New', Courier, monospace;
-				}
-				.showGoods .desc{
-					display: block;
-					padding: 2rem 0.5rem;
-					text-align: left;
-				}
-				input[type=number]{
-					width: 5rem;
-				}
-				input[type=button]{
-					width:2rem;
-				}
-				</style>
-
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+<!-- v1.0 还没投入使用就开始了v2.0。。。此次更新增强了物资申请的难度，先写文件过初审，再等货物批准。。。。-->
 <body>
 	<img id="headimg" src="<?php echo $yb_headimg;?>"/><br>
-<h3>欢迎使用陕科大易班物资管理系统</h2>
+<h3>欢迎使用陕科大易班物资管理系统 v2.0</h2>
 <br>
 <section>
 	申请物资
-<!-- <form>
-<input type=""> 
+	在这里先上传资料，写清楚活动的具体情况，然后点击上传按钮。静静等待审核状态的变更。在此之前，你没有挑选物资的权利。
+	<br>
+	由于易班平台限制，你只能上传不大于10m的文件。
+	<br>
+	<!-- 用易班平台就要好好听话，上传10m以内的文件，或者想上传更大的文件，请资助一下开发者。 支付宝--mydu8@qq.com -->
+<form action="action/upload_file.php" method="post" enctype="multipart/form-data">
+<input type="file" name="file" id="file" onchange="upload()"> 
+<input type='hidden' name='MAX_FILE_SIZE' value='1024' >
+<input type="submit"  value="上传" >
 </form>
-
- -->
-
-
-
-
-
-
-<!-- 先把所有的信息发过来，，然后只保留不为零的数据 -->
-
-<form method="post" action="action/user_add_order.php">
-
-<!-- <table width="100%">
-	<tr>
-		<th>id</th><th>名称</th><th>剩余数量</th><th>发布时间</th><th>需求数量</th>
-    </tr>
-	<?php 
-	$students->look_goods();
-	?>
-<tr><td colspan="2">活动介绍<br>（100字左右）</td><td colspan="2"><textarea name="describe" rows="3" cols="25" maxlength="100" required ></textarea></td></tr>
-</table> -->
-
-<?php 
-	$students->look_goods();
-	?>
-
-<br>
-<br>
-活动介绍(100字左右) <textarea style="border-bottom:solid 1px #000;" name="describe" rows="5" cols="25" maxlength="100" required ></textarea></td></tr>
- 	
-<input type="submit" value="提交申请">
-</form>
-
 </section>
 <hr>
 <section>
 	我的订单
 	<form>
-	<table>
+	<table class="table">
 		<tr>
 			<th>订单号</th>
 			<th>处理时间</th>
@@ -103,26 +46,13 @@ Powered by <a href="http://jianwi.cn">jianwi.cn</a>
 </body>
 
 <script>
-		// 给每个id写上序号o，然后访问第o个goods_count元素。
-	
-		function add(n){
-		var o=n.id;
-		var input_n=document.getElementsByClassName(`${n.id}`)[0];
-		if(parseInt(input_n.value)>=parseInt(input_n.max)){
-			return;
-		}
-		input_n.value=parseInt(input_n.value)+1;
-		
-	
-		}
-	
-		function reduce(n){
-		var o=n.id;
-		var input_n=document.getElementsByClassName(`${n.id}`)[0];
-		if(parseInt(input_n.value)<=0){
-			return;
-		}
-		input_n.value=parseInt(input_n.value)-1;
-		}
+
+	function upload(){
+	var file=document.getElementById("file");
+	if (file.files[0].size>9900000) {
+		alert("文件过大，不支持上传。请上传小于10M的文件。");
+		return true;
+	}
+	}	
 	</script>
 </html>
